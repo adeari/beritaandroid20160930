@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="1256c10604bb098490eab070d76754ac5ceab35c">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-24.1.1_aa719c201346e15b5bb837191e9bebb22537f3d5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/2.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/de.hdodenhof-circleimageview-2.1.0_974e328435b1ebe09df24efd449490145cc448d7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="6d7d803871e3203465f71a163e7af104f807b446">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-24.1.1_ae504df6874a00a55be7a2f037f1fce1a10e9c30.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="c936c1bd42f0c018c18920c7bec619ef056b24f8">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-24.1.1_9148a8606f8cbed4a85fc062ac4c57f4d3e79411.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/libs/commons-net-3.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="342fc284019f590e1308056990fdb24a08f06318">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/commons-net-3.5_8d8ccab077a0496c58451a2707432e0b79c213f5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/.gradle/caches/modules-2/files-2.1/org.jbundle.util.osgi.wrapped/org.jbundle.util.osgi.wrapped.org.apache.http.client/4.1.2/98c86e42679fe7ac066f6c242e0d14f0bce0bb7c/org.jbundle.util.osgi.wrapped.org.apache.http.client-4.1.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="98c86e42679fe7ac066f6c242e0d14f0bce0bb7c">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/org.jbundle.util.osgi.wrapped.org.apache.http.client-4.1.2_c7ec8d5098228c3927b1b005b97ff188235c1875.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="f62e763609f65e47dc6c498760a4accf02776788">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-24.1.1_835791b953cb1a76c6b9512d6cbbf719aa06e30a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.5.2/ecf534dba3a8446ce84cbb797d314763be212a68/glide-3.5.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="ecf534dba3a8446ce84cbb797d314763be212a68">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/glide-3.5.2_5d0afd5c10b066436a87edc2241dacea63766707.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/exploded-aar/pl.openrnd.android/multi-level-listview/1.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="0354781c82c975b4a1035141ce3dad8cc4f2fb9a">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/pl.openrnd.android-multi-level-listview-1.0.1_ebf8bed47c05ffe671856fd81c69d5d946d337cf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="787871951412550519b0222aba3c9df4cea49875">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-24.1.1_f93c2538ec4307f0bf6c39857fa6e1420a7f7d01.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/24.1.1/support-annotations-24.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="3af19f153122737b372622fa6c81dd11a1c6b999">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/support-annotations-24.1.1_e58eebd3e1dbc239e697c2b8d63bc6d0cd31eab3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.1.1/jars/libs/internal_impl-24.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="f78c2f395cb096f9dc1dc07e729922b8fcd3c4f5">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/internal_impl-24.1.1_7303f0c6fe6511ce5c8ceaa047940f62ccb1b1c0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/exploded-aar/com.android.support/design/24.1.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="e195bd694d5389acfba27ff4fdfa64c4c65b2c05">
+        <dex dex="/home/ade/AndroidStudioProjects/BeritaSurabaya/app/build/intermediates/pre-dexed/debug/com.android.support-design-24.1.1_67e79237f31a5be976a62c0a7f8e58f666af18a8.jar" />
+    </item>
+
+</items>

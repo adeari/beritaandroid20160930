@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_ui"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ralatlayout"
+            android:layout_marginBottom="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Ralat"
+                android:background="#9ef573"
+                android:id="@+id/ralatkomentar"
+                android:paddingRight="5dp"
+                android:paddingLeft="5dp" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Hapus"
+                android:background="#ef4343"
+                android:id="@+id/hapuskomentar"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/komentarlayoutuserprifile">
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profileUserImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_person_blue_24dp"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#cdcfa9"
+                android:layout_below="@+id/textView7"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/profileNameKomen"
+                android:textColor="#1b1bc1"
+                android:textStyle="bold|italic"
+                android:text="Name"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <View style="@style/Divider"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layoutkomentar"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imagekomentar"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/komentar"
+                android:textColor="#090909" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/komentarformralat"
+            android:background="#e8f6f4"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/komentarralatimage"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/komentarbuttonsbarralat"
+                android:layout_below="@+id/komentarralatimage">
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Galeri"
+                    android:background="#6c62f0"
+                    android:id="@+id/komentarralatgaleributton"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Kamera"
+                    android:id="@+id/komentarralatkamerabutton"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="#6624a8"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Hapus"
+                    android:id="@+id/komentarlayouthapusgambar"
+                    android:layout_alignParentTop="true"
+                    android:background="#f46f6f"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Komentar"
+                android:id="@+id/textView6"
+                android:layout_below="@+id/komentarbuttonsbarralat" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/komentaredittextralat"
+                android:layout_below="@+id/textView6" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/komentaredittextralat">
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:text="Simpan"
+                    android:id="@+id/komentarralatsimpan"
+                    android:paddingLeft="5dp"
+                    android:background="#9ef573"
+                    android:paddingRight="5dp"
+                    android:layout_marginStart="93dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:text="Batal"
+                    android:id="@+id/komentarralatbatal"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:background="#ef4343"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/komentarralatsimpan"
+                    android:layout_marginStart="43dp" />
+            </RelativeLayout>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/komentarralatprogressbar"
+                android:layout_alignTop="@+id/textView6"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imagelinkkomentarralat"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="13dp"
+        android:layout_weight="1"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/komentarid"
+        android:visibility="gone" />
+
+</LinearLayout>
