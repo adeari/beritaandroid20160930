@@ -24,6 +24,7 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -140,11 +141,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private Spinner beritaAddSpinner;
 
+    private EditText loginpassword;
+
     private LocationManager locationManager;
     private final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
     private final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
     private Timer timer;
     private MyTimerTask myTimerTask;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -434,6 +438,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         myTimerTask = new MyTimerTask();
 //        timer.schedule(myTimerTask, 0, 60000); // every minutes
         timer.schedule(myTimerTask, 0, 300000); // every minutes
+
+        loginpassword = (EditText) findViewById(R.id.loginpassword);
+        loginpassword.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (loginpassword.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+                            loginpassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        } else {
+                            loginpassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        }
+                    }
+                }
+        );
     }
 
     @Override
@@ -578,7 +596,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                         break;
                     case "Log In" :
                         ((EditText) findViewById(R.id.loginusernamenik)).setText("");
-                        ((EditText) findViewById(R.id.loginpassword)).setText("");
+                        loginpassword.setText("");
 
                         closeLayouts();
                         setViewLayout((View) findViewById(R.id.userlogin), View.VISIBLE);
@@ -1162,7 +1180,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         @Override
         protected void onPreExecute() {
             usernamenik = ((EditText) findViewById(R.id.loginusernamenik)).getText().toString();
-            password = ((EditText) findViewById(R.id.loginpassword)).getText().toString();
+            password = loginpassword.getText().toString();
             loginProgressbar.setVisibility(View.VISIBLE);
         }
 
