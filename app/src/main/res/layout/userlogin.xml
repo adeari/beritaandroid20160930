@@ -54,13 +54,12 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/loginusernamenik" />
 
-            <EditText
+            <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:ems="10"
                 android:id="@+id/loginpassword"
-                android:layout_below="@+id/textloginpassword" />
+                android:layout_below="@+id/textloginpassword"
+                />
 
             <RelativeLayout
                 android:layout_width="match_parent"

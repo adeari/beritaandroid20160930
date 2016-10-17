@@ -3,12 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\libs\commons-net-3.5.jar"
+        jumboMode="false"
         optimize="true"
         revision="24.0.1"
-        sha1="e4c0203e5e08d3c3f05b1d886905061fe2174e7d">
-        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_0092897d5ab4b014acd860fe9a875a2621898fed.jar" />
+        sha1="342fc284019f590e1308056990fdb24a08f06318">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\commons-net-3.5_6ae14f357342884adfa1469cbe8ba2639879d185.jar" />
     </item>
     <item
         is-multidex="false"
@@ -30,6 +30,24 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="6d7d803871e3203465f71a163e7af104f807b446">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-24.1.1_45f9aa91579fca031aa3c083d1661cb3c8284d28.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.github.scottyab\showhidepasswordedittext\0.8\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="d9255f067a6b7d921bc73929fcb877eaac5bcf95">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\com.github.scottyab-showhidepasswordedittext-0.8_274d14776f4bd8491fb7087b281369fdf72b3ce4.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\libs\internal_impl-24.1.1.jar"
         jumboMode="true"
         optimize="true"
@@ -48,6 +66,33 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\24.1.1\support-annotations-24.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="3af19f153122737b372622fa6c81dd11a1c6b999">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\support-annotations-24.1.1_0b2bad812168dc5d75b83a6573b0af9c29f92adf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="787871951412550519b0222aba3c9df4cea49875">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-24.1.1_349e2d78c8885133c4378bedba60101ccfc4ebed.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\libs\internal_impl-24.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="f78c2f395cb096f9dc1dc07e729922b8fcd3c4f5">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\internal_impl-24.1.1_0d11094dad2c81aebe9c63eeacfc79db71b457bc.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -57,12 +102,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\pl.openrnd.android\multi-level-listview\1.0.1\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="24.0.1"
-        sha1="f2096848345febae93bc3c3d465c13ba7b4e0278">
-        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\instant-run_1da162df9359acead046667ebdf922ecf632008f.jar" />
+        sha1="0354781c82c975b4a1035141ce3dad8cc4f2fb9a">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\pl.openrnd.android-multi-level-listview-1.0.1_2b0a48c0e8fddf71eef3a0fb5168f0046b3eb502.jar" />
     </item>
     <item
         is-multidex="false"
@@ -93,6 +138,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="c936c1bd42f0c018c18920c7bec619ef056b24f8">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-24.1.1_ecd61e0f4e970834b9a4f354f0d80460c4b2264a.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\pl.openrnd.android\multi-level-listview\1.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -102,12 +156,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.android.support\design\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="e195bd694d5389acfba27ff4fdfa64c4c65b2c05">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\com.android.support-design-24.1.1_472f9171b393702ea721a3d8909824a8eaef8de8.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\widianta.CAMLINE\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.5.2\ecf534dba3a8446ce84cbb797d314763be212a68\glide-3.5.2.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.1"
         sha1="ecf534dba3a8446ce84cbb797d314763be212a68">
         <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\glide-3.5.2_d18dc42240d81ec43c56d1a40fed2b5b30526abc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.github.scottyab\showhidepasswordedittext\0.8\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="d9255f067a6b7d921bc73929fcb877eaac5bcf95">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\com.github.scottyab-showhidepasswordedittext-0.8_274d14776f4bd8491fb7087b281369fdf72b3ce4.jar" />
     </item>
     <item
         is-multidex="false"
@@ -122,6 +194,51 @@
         is-multidex="false"
         jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\jars\classes.jar"
         jumboMode="true"
+        optimize="true"
+        revision="24.0.1"
+        sha1="1256c10604bb098490eab070d76754ac5ceab35c">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-24.1.1_6d436e6df76f9bb5077f56ba14a40b1eb5859bfd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\de.hdodenhof\circleimageview\2.1.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\de.hdodenhof-circleimageview-2.1.0_34a60a12723cd02028c0071e68d67590402aadde.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="f62e763609f65e47dc6c498760a4accf02776788">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-24.1.1_aee44633f025fc47cf73d011b0ff200031e8cd8c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.5.2\ecf534dba3a8446ce84cbb797d314763be212a68\glide-3.5.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="ecf534dba3a8446ce84cbb797d314763be212a68">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\glide-3.5.2_d18dc42240d81ec43c56d1a40fed2b5b30526abc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\.gradle\caches\modules-2\files-2.1\org.jbundle.util.osgi.wrapped\org.jbundle.util.osgi.wrapped.org.apache.http.client\4.1.2\98c86e42679fe7ac066f6c242e0d14f0bce0bb7c\org.jbundle.util.osgi.wrapped.org.apache.http.client-4.1.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.1"
+        sha1="98c86e42679fe7ac066f6c242e0d14f0bce0bb7c">
+        <dex dex="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\pre-dexed\debug\org.jbundle.util.osgi.wrapped.org.apache.http.client-4.1.2_6a6ae2d82a1b986c122523b0dc04422c87e55af4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\widianta.CAMLINE\Documents\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\jars\classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="24.0.1"
         sha1="1256c10604bb098490eab070d76754ac5ceab35c">

@@ -148,7 +148,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Komentar"
+                android:text="Kirim"
                 android:id="@+id/beritadetailsimpankomentar"
                 android:background="#55e977"
                 android:layout_below="@+id/layoutbuttonkomentar"

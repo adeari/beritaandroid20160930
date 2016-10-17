@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     private Spinner beritaAddSpinner;
 
-    private EditText loginpassword;
+    private com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText loginpassword;
 
     private LocationManager locationManager;
     private final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
@@ -326,8 +326,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String passwordRegister = ((EditText) findViewById(R.id.daftarpassword)).getText().toString();
-                        String passwordreRegister = ((EditText) findViewById(R.id.daftarrepassword)).getText().toString();
+                        String passwordRegister = ((com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText) findViewById(R.id.daftarpassword)).getText().toString();
+                        String passwordreRegister = ((com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText) findViewById(R.id.daftarrepassword)).getText().toString();
                         String usernamenik = ((EditText) findViewById(R.id.daftarusernamenik)).getText().toString();
                         if (usernamenik.length() == 0) {
                             Toast.makeText(MainActivity.this, "Tulis User Name / NIK",
@@ -439,19 +439,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 //        timer.schedule(myTimerTask, 0, 60000); // every minutes
         timer.schedule(myTimerTask, 0, 300000); // every minutes
 
-        loginpassword = (EditText) findViewById(R.id.loginpassword);
-        loginpassword.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (loginpassword.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-                            loginpassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                        } else {
-                            loginpassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                        }
-                    }
-                }
-        );
+        loginpassword = (com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText) findViewById(R.id.loginpassword);
     }
 
     @Override
@@ -1102,7 +1090,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         protected void onPreExecute() {
             email = ((EditText) findViewById(R.id.daftaremail)).getText().toString();
             usernamenik = ((EditText) findViewById(R.id.daftarusernamenik)).getText().toString();
-            password = ((EditText) findViewById(R.id.daftarpassword)).getText().toString();
+            password = ((com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText) findViewById(R.id.daftarpassword)).getText().toString();
             findViewById(R.id.daftarprogressbar).setVisibility(View.VISIBLE);
         }
 
