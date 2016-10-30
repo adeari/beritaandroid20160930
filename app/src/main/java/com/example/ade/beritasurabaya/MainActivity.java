@@ -26,6 +26,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -300,11 +301,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     @Override
                     public void onClick(View v) {
                         if (((EditText) findViewById(R.id.beritaaddJudulBerita)).getText().length() == 0) {
-                            Toast.makeText(MainActivity.this, "Tulis Judul Berita",
-                                    Toast.LENGTH_SHORT).show();
+                            showAlert("Tulis Judul Berita");
                         } else if (((EditText) findViewById(R.id.beritaaddDeskripsi)).getText().length() == 0) {
-                            Toast.makeText(MainActivity.this, "Tulis Deskripsi Berita",
-                                    Toast.LENGTH_SHORT).show();
+                            showAlert("Tulis Deskripsi Berita");
                         } else {
                             new PostBerita().execute();
                         }
@@ -330,14 +329,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                         String passwordreRegister = ((com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText) findViewById(R.id.daftarrepassword)).getText().toString();
                         String usernamenik = ((EditText) findViewById(R.id.daftarusernamenik)).getText().toString();
                         if (usernamenik.length() == 0) {
-                            Toast.makeText(MainActivity.this, "Tulis User Name / NIK",
-                                    Toast.LENGTH_SHORT).show();
+                            showAlert("Tulis User Name / NIK");
                         } else if (passwordRegister.length() == 0) {
-                            Toast.makeText(MainActivity.this, "Tulis Password",
-                                    Toast.LENGTH_SHORT).show();
+                            showAlert("Tulis Password");
                         } else if (!passwordRegister.equals(passwordreRegister)) {
-                            Toast.makeText(MainActivity.this, "Password dan Re Password harus sama",
-                                    Toast.LENGTH_SHORT).show();
+                            showAlert("Password dan Re Password harus sama");
                         } else {
                             new registeruser().execute();
                         }
@@ -376,8 +372,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     @Override
                     public void onClick(View v) {
                         if (((EditText) findViewById(R.id.beritadetailkomentar)).getText().length() == 0) {
-                            Toast.makeText(MainActivity.this, "Tulis komentar",
-                                    Toast.LENGTH_LONG).show();
+                            showAlert("Tulis komentar");
                         } else {
                             new PostKomentar().execute();
                         }
@@ -390,11 +385,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     @Override
                     public void onClick(View v) {
                         if (((EditText) findViewById(R.id.profileNama)).getText().length() == 0) {
-                            Toast.makeText(MainActivity.this, "Isikan nama", Toast.LENGTH_SHORT).show();
+                            showAlert("Isikan nama");
                         } else if (((EditText) findViewById(R.id.profileNik)).getText().length() == 0) {
-                            Toast.makeText(MainActivity.this, "Isikan NIK", Toast.LENGTH_SHORT).show();
+                            showAlert("Isikan NIK");
                         } else if (((EditText) findViewById(R.id.profileEmail)).getText().length() == 0) {
-                            Toast.makeText(MainActivity.this, "Isikan Email", Toast.LENGTH_SHORT).show();
+                            showAlert("Isikan Email");
                         } else {
                             new EditMyProfile().execute();
                         }
@@ -408,9 +403,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     public void onClick(View v) {
                         String profilePassword = ((EditText) findViewById(R.id.profilePassword)).getText().toString();
                         if (profilePassword.length() == 0) {
-                            Toast.makeText(MainActivity.this, "Isikan Password", Toast.LENGTH_SHORT).show();
+                            showAlert("Isikan Password");
                         } else if (!profilePassword.equals(((EditText) findViewById(R.id.profileRePassword)).getText().toString())) {
-                            Toast.makeText(MainActivity.this, "Re password harus sama dengan password", Toast.LENGTH_SHORT).show();
+                            showAlert("Re password harus sama dengan password");
                         } else {
                             new GantiPasswordProfileProfile().execute();
                         }
@@ -425,7 +420,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         imageberitadetail = (ImageView) findViewById(R.id.imageberitadetail);
         imageberitadetail.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;;
         beritadetailkomentarimageview = (ImageView) findViewById(R.id.beritadetailkomentarimageview);
-        beritadetailkomentarimageview.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;;
+        beritadetailkomentarimageview.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
 
         linerlayoutVerticalDAta = (LinearLayout) findViewById(R.id.linerlayoutVerticalDAta);
 
@@ -747,8 +742,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             }
             fileUpload = null;
             imageAction = "";
-            Toast.makeText(MainActivity.this, "Tersimpan",
-                    Toast.LENGTH_LONG).show();
+            showAlert("Tersimpan");
         }
 
         @Override
@@ -1066,18 +1060,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         protected void onPostExecute(String result) {
             try {
                 if (resultPostHTml.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Koneksi Internet Terputus",
-                            Toast.LENGTH_SHORT).show();
+                    showAlert("Koneksi Internet Terputus");
                 } else {
                     JSONObject jsonObject = new JSONObject(resultPostHTml);
                     if (jsonObject.getString("success").equals("1")) {
-                        Toast.makeText(MainActivity.this, "User Tersimpan",
-                                Toast.LENGTH_SHORT).show();
+                        showAlert("User Tersimpan");
                         setViewLayout((View) findViewById(R.id.userregister), View.GONE);
                         setViewLayout((View) findViewById(R.id.userlogin), View.VISIBLE);
                     } else {
-                        Toast.makeText(MainActivity.this, jsonObject.getString("msg"),
-                                Toast.LENGTH_SHORT).show();
+                        showAlert(jsonObject.getString("msg"));
                     }
                 }
                 findViewById(R.id.daftarprogressbar).setVisibility(View.GONE);
@@ -1101,10 +1092,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private class loginuser extends AsyncTask<String, Void, String> {
         private String usernamenik;
         private String password;
-        private String resultPostHTml;
+        private JSONObject jsonObject;
+
         @Override
         protected String doInBackground(String... params) {
-            resultPostHTml = "";
+            String resultPostHTml = "";
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(PropertiesData.domain.concat("android/ceklogin"));
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -1120,8 +1112,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     while ((body = rd.readLine()) != null) {
                         resultPostHTml = body;
                     }
+                    if (resultPostHTml != null && !resultPostHTml.isEmpty()) {
+                        jsonObject = new JSONObject(resultPostHTml);
+                    }
                 } catch (IOException e) {
                     Log.e("IOex1", e.getMessage());
+                } catch (JSONException e) {
+                    Log.e("json", e.getMessage());
                 } finally {
                     if (rd != null) {
                         try {
@@ -1144,23 +1141,25 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         @Override
         protected void onPostExecute(String result) {
             loginProgressbar.setVisibility(View.GONE);
-            if (resultPostHTml.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Koneksi Internet Terputus",
-                        Toast.LENGTH_SHORT).show();
+            if (jsonObject == null) {
+                showAlert("Koneksi Internet Terputus");
             } else {
-                if (resultPostHTml.equals("1")) {
-                    setViewLayout((View) findViewById(R.id.userlogin), View.GONE);
-                    setViewLayout((View) findViewById(R.id.populer), View.VISIBLE);
-                    mainActivity.setTitle("Populer");
+                try {
+                    if (jsonObject.get("success").toString().equals("1")) {
+                        setViewLayout((View) findViewById(R.id.userlogin), View.GONE);
+                        setViewLayout((View) findViewById(R.id.populer), View.VISIBLE);
+                        mainActivity.setTitle("Populer");
 
-                    editor.putString("usernamenik", usernamenik);
-                    editor.putString("password", password);
-                    editor.commit();
+                        editor.putString("usernamenik", usernamenik);
+                        editor.putString("password", password);
+                        editor.commit();
 
-                    confMenu();
-                } else {
-                    Toast.makeText(MainActivity.this, "Username / Password salah",
-                            Toast.LENGTH_SHORT).show();
+                        confMenu();
+                    } else {
+                        showAlert(jsonObject.get("msg").toString());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -1364,8 +1363,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     ((TextView) findViewById(R.id.deskripsiberitadetail)).setText("");
                     ((TextView) findViewById(R.id.dateberitadetail)).setText("");
                     ((TextView) findViewById(R.id.beritadetailidberita)).setText("");
-                    Toast.makeText(MainActivity.this, "Koneksi Internet Terputus",
-                            Toast.LENGTH_SHORT).show();
+                    showAlert("Koneksi Internet Terputus");
                 } else {
                     ((TextView) findViewById(R.id.judulBeritaDetail)).setText(jsonObject.get("judul").toString());
                     ((TextView) findViewById(R.id.deskripsiberitadetail)).setText(jsonObject.get("deskripsi").toString());
@@ -1550,6 +1548,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                                                     }
                                                 })
                                                 .into(imageRalatKomentar);
+                                        imageRalatKomentar.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
                                         linearLayout.findViewById(R.id.komentarlayouthapusgambar).setVisibility(View.VISIBLE);
                                     } else {
                                         imageRalatKomentar.setVisibility(View.GONE);
@@ -1658,8 +1657,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         @Override
         protected void onPostExecute(String result) {
             new GetKomentar().execute();
-            Toast.makeText(MainActivity.this, "Komentar Terhapus",
-                    Toast.LENGTH_SHORT).show();
+            showAlert("Komentar Terhapus");
         }
 
         @Override
@@ -1780,8 +1778,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         @Override
         protected void onPostExecute(String result) {
             showPopulerBeritaList("beritasaya");
-            Toast.makeText(MainActivity.this, "Berita Terhapus",
-                    Toast.LENGTH_SHORT).show();
+            showAlert("Berita Terhapus");
         }
 
         @Override
@@ -1849,8 +1846,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         @Override
         protected void onPostExecute(String result) {
             if (imageText == null) {
-                Toast.makeText(MainActivity.this, "Koneksi Internet Terputus",
-                        Toast.LENGTH_SHORT).show();
+                showAlert("Koneksi Internet Terputus");
             } else {
                 ((EditText) findViewById(R.id.beritaaddJudulBerita)).setText(imageText.getJudul());
                 ((EditText) findViewById(R.id.beritaaddDeskripsi)).setText(imageText.getBerita());
@@ -2035,7 +2031,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             } else {
                 bertiaDetailAddKomentar.setVisibility(View.VISIBLE);
             }
-            Toast.makeText(MainActivity.this, "Tersimpan", Toast.LENGTH_LONG).show();
+            showAlert("Tersimpan");
             new GetKomentar().execute();
             fileUpload = null;
             imageAction = "";
@@ -2229,8 +2225,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             try {
                 if (jsonObject == null) {
                     profileProgressBar.setVisibility(View.GONE);
-                    Toast.makeText(MainActivity.this, "Koneksi Internet Terputus",
-                            Toast.LENGTH_SHORT).show();
+                    showAlert("Koneksi Internet Terputus");
                 } else {
                     ((EditText) findViewById(R.id.profileNama)).setText(jsonObject.get("name").toString());
                     ((EditText) findViewById(R.id.profileNik)).setText(jsonObject.get("nik").toString());
@@ -2280,6 +2275,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         String name;
         String nik;
         String email;
+        private JSONObject jsonObject;
         @Override
         protected String doInBackground(String... params) {
             String fileNameForUpload = "";
@@ -2378,9 +2374,32 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             nameValuePairs.add(new BasicNameValuePair("password", sharedPreferences.getString("password", "")));
 
             try {
+                String resultPostHTml = "";
                 httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 HttpResponse response = httpclient.execute(httpPost);
-                viewhtmlPost(response);
+                BufferedReader rd = null;
+                String body = "";
+                try {
+                    rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+                    while ((body = rd.readLine()) != null) {
+                        resultPostHTml = body;
+                    }
+                    if (resultPostHTml != null && !resultPostHTml.isEmpty()) {
+                        jsonObject = new JSONObject(resultPostHTml);
+                    }
+                } catch (IOException e) {
+                    Log.e("IOex1", e.getMessage());
+                } catch (JSONException e) {
+                    Log.e("js1on", e.getMessage());
+                } finally {
+                    if (rd != null) {
+                        try {
+                            rd.close();
+                        } catch (IOException e) {
+                            Log.e("IOex", e.getMessage());
+                        }
+                    }
+                }
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (ClientProtocolException e) {
@@ -2395,8 +2414,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         protected void onPostExecute(String result) {
             fileUpload = null;
             profileProgressBar.setVisibility(View.GONE);
-            Toast.makeText(MainActivity.this, "Profile Tersimpan",
-                    Toast.LENGTH_SHORT).show();
+            if (jsonObject == null) {
+                showAlert("Koneksi Internet Terputus");
+            } else {
+                try {
+                    if (jsonObject.get("success").toString().equalsIgnoreCase("1")) {
+                        showAlert("Profile Tersimpan");
+                    } else {
+                        showAlert(jsonObject.get("msg").toString());
+                    }
+                } catch (JSONException e) {
+                    Log.e("json", e.getMessage());
+                }
+            }
+
         }
 
         @Override
@@ -2442,8 +2473,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         @Override
         protected void onPostExecute(String result) {
             findViewById(R.id.profileGantiPasswordProgressBar).setVisibility(View.GONE);
-            Toast.makeText(MainActivity.this, "Password berubah",
-                    Toast.LENGTH_SHORT).show();
+            showAlert("Password berubah");
         }
 
         @Override
@@ -2540,5 +2570,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 }});
         }
 
+    }
+
+    private void showAlert(String alert) {
+        Toast toast = Toast.makeText(MainActivity.this,alert,Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
     }
 }
