@@ -24,7 +24,7 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.text.InputType;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -62,7 +62,9 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.ade.beritasurabaya.data.BaseItem;
 import com.example.ade.beritasurabaya.data.CustomDataProvider;
+import com.example.ade.beritasurabaya.data.PesanUser;
 import com.example.ade.beritasurabaya.views.LevelBeamView;
+import com.example.ade.beritasurabaya.views.PesanList;
 
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -93,7 +95,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -105,6 +106,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private DrawerLayout drawer;
     private ListImageText _listImageText;
     private ListImageTextRalat _listImageTextRalat;
+
+    private ListView listPesan;
+    private PesanList pesanList;
+    private ArrayList<PesanUser> pesanUsers;
+
+
 
     private ProgressBar beritaAddProgressbar;
     private ProgressBar beritaDetailProgressBar;
@@ -130,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private Button beritAddHapusGambar;
     private Button bertiaDetailAddKomentar;
     private Button populerTambahBeritaButton;
+    private Button buttonShareBerita;
 
     private ImageView imageViewAccess;
     private CircleImageView profileImage;
@@ -149,7 +157,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
     private Timer timer;
     private MyTimerTask myTimerTask;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,6 +212,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         _arrayImageTexts = new ArrayList<ImageText>();
         _listImageText = new ListImageText(mainActivity, _arrayImageTexts);
         _listImageTextRalat = new ListImageTextRalat(mainActivity, _arrayImageTexts);
+
+        pesanUsers = new ArrayList<PesanUser>();
+        pesanList = new PesanList(mainActivity, pesanUsers);
+        listPesan = (ListView) findViewById(R.id.listpesan);
+        listPesan.setAdapter(pesanList);
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, new String[]{"Umum", "Acara", "Pengaduan"});
@@ -435,6 +447,17 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         timer.schedule(myTimerTask, 0, 300000); // every minutes
 
         loginpassword = (com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText) findViewById(R.id.loginpassword);
+
+        buttonShareBerita = (Button) findViewById(R.id.buttonShareBerita);
+
+        ((ImageButton) findViewById(R.id.buttonSearchBeritaList)).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new GetPopulerData().execute();
+                    }
+                }
+        );
     }
 
     @Override
@@ -545,6 +568,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             position++;
         }
     }
+    private void showPesanUser() {
+        closeLayouts();
+        setViewLayout((View) findViewById(R.id.pesanuser), View.VISIBLE);
+        mainActivity.setTitle("Pesan");
+        new GetPesanUser().execute();
+    }
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
 
         private void showItemDescription(Object object, ItemInfo itemInfo) {
@@ -567,8 +596,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                         new GetMyProfile().execute();
                         break;
                     case "Berita Saya" : showPopulerBeritaList("beritasaya"); break;
-                    case "Tambah Berita" : closeLayouts();
+                    case "Tambah Berita" :
                         tambahBeritaPrepare();
+                        break;
+                    case "Pesan" : showPesanUser();
                         break;
                     case "Log Out" :
                         editor.clear();
@@ -841,6 +872,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     setFileUploadCamera(selectedImage);
                 }
                 break;
+            case 4432:
+                if(resultCode == RESULT_OK){
+                    Log.i("sh", "bisa share");
+                }
         }
     }
 
@@ -911,36 +946,48 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private void getPopulerJson() {
         BufferedReader inputStream = null;
         URL myurl = null;
+        String urlExecute = "";
         try {
             if (beritaShow.isEmpty() || beritaShow.equals("populer")) {
-                if (sharedPreferences.getString("usernamenik", "").equals("")) {
-                    myurl = new URL(PropertiesData.domain.concat("android/populer"));
+                urlExecute = PropertiesData.domain.concat("android/populer");
+                if (sharedPreferences.getString("usernamenik", "").isEmpty()) {
+                    urlExecute = urlExecute.concat("?");
                 } else {
-                    myurl = new URL(PropertiesData.domain.concat("android/populer").concat("?usernamenik=")
+                    urlExecute = urlExecute.concat("?usernamenik=")
                             .concat(sharedPreferences.getString("usernamenik", ""))
-                            .concat("&password=").concat(sharedPreferences.getString("password", "")));
+                            .concat("&password=").concat(sharedPreferences.getString("password", ""));
                 }
             } else if (beritaShow.equals("terbaru")) {
-                if (sharedPreferences.getString("usernamenik", "").equals("")) {
-                    myurl = new URL(PropertiesData.domain.concat("android/terbaru"));
+                urlExecute = PropertiesData.domain.concat("android/terbaru");
+                if (sharedPreferences.getString("usernamenik", "").isEmpty()) {
+                    urlExecute = urlExecute.concat("?");
                 } else {
-                    myurl = new URL(PropertiesData.domain.concat("android/terbaru").concat("?usernamenik=")
+                    urlExecute = urlExecute.concat("?usernamenik=")
                             .concat(sharedPreferences.getString("usernamenik", ""))
-                            .concat("&password=").concat(sharedPreferences.getString("password", "")));
+                            .concat("&password=").concat(sharedPreferences.getString("password", ""));
                 }
             } else if (beritaShow.equals("beritasaya")) {
-                myurl = new URL(PropertiesData.domain.concat("android/beritasaya").concat("?usernamenik=")
+                urlExecute = PropertiesData.domain.concat("android/beritasaya").concat("?usernamenik=")
                         .concat(sharedPreferences.getString("usernamenik", ""))
-                        .concat("&password=").concat(sharedPreferences.getString("password", "")));
+                        .concat("&password=").concat(sharedPreferences.getString("password", ""));
             } else {
-                if (sharedPreferences.getString("usernamenik", "").equals("")) {
-                    myurl = new URL(PropertiesData.domain.concat("android/artikel-").concat(beritaShow));
+                urlExecute = PropertiesData.domain.concat("android/artikel-").concat(beritaShow);
+                if (sharedPreferences.getString("usernamenik", "").isEmpty()) {
+                    urlExecute = urlExecute.concat("?");
                 } else {
-                    myurl = new URL(PropertiesData.domain.concat("android/artikel-").concat(beritaShow).concat("?usernamenik=")
+                    urlExecute = urlExecute.concat("?usernamenik=")
                             .concat(sharedPreferences.getString("usernamenik", ""))
-                            .concat("&password=").concat(sharedPreferences.getString("password", "")));
+                            .concat("&password=").concat(sharedPreferences.getString("password", ""));
                 }
             }
+
+            if (!((EditText) findViewById(R.id.searchTextListBerita)).getText().toString().isEmpty()) {
+                if (!urlExecute.substring((urlExecute.length() - 1)).equalsIgnoreCase("?")) {
+                    urlExecute = urlExecute.concat("&");
+                }
+                urlExecute = urlExecute.concat("pencarian=").concat(((EditText) findViewById(R.id.searchTextListBerita)).getText().toString());
+            }
+            myurl = new URL(urlExecute);
             URLConnection dc = myurl.openConnection();
             inputStream = new BufferedReader(new InputStreamReader(
                     dc.getInputStream()));
@@ -1146,9 +1193,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             } else {
                 try {
                     if (jsonObject.get("success").toString().equals("1")) {
-                        setViewLayout((View) findViewById(R.id.userlogin), View.GONE);
-                        setViewLayout((View) findViewById(R.id.populer), View.VISIBLE);
-                        mainActivity.setTitle("Populer");
+                        showPesanUser();
 
                         editor.putString("usernamenik", usernamenik);
                         editor.putString("password", password);
@@ -1283,6 +1328,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     break;
                 case R.id.profileuser: viewLayout = "profileuser";
                     break;
+                case R.id.pesanuser: viewLayout = "pesanuser";
+                    break;
             }
         }
     }
@@ -1294,6 +1341,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         setViewLayout((View) findViewById(R.id.userregister), View.GONE);
         setViewLayout((View) findViewById(R.id.userlogin), View.GONE);
         setViewLayout((View) findViewById(R.id.profileuser), View.GONE);
+        setViewLayout((View) findViewById(R.id.pesanuser), View.GONE);
     }
 
     public void closeLayoutsFirst() {
@@ -1394,6 +1442,53 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                         beritaDetailProgressBar.setVisibility(View.GONE);
                         setKomentar(komentarTexts);
                     }
+                    buttonShareBerita.setOnClickListener(null);
+                    buttonShareBerita.setVisibility(View.VISIBLE);
+                    buttonShareBerita.setOnClickListener(
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent share = new Intent(android.content.Intent.ACTION_SEND);
+                                    share.setType("text/plain");
+                                    try {
+                                        share.putExtra(Intent.EXTRA_SUBJECT, jsonObject.get("judul").toString());
+                                        share.putExtra(Intent.EXTRA_TEXT, PropertiesData.domain +"beritadetail-" + jsonObject.get("id") + "-artikel-"+ jsonObject.get("kategori"));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    startActivityForResult(Intent.createChooser(share, "Surabaya Digital City"), 4432);
+                                    if (!sharedPreferences.getString("usernamenik", "").isEmpty()) {
+                                        new AddShareBeritaUser().execute();
+                                    }
+
+                                }
+                            }
+                    );
+                    findViewById(R.id.layoutberitadetailuser).setVisibility(View.VISIBLE);
+
+                    JSONObject user1JsonObject = (JSONObject) jsonObject.get("user1");
+                    ((TextView) findViewById(R.id.profileNameUserBerita)).setText(user1JsonObject.get("name").toString());
+                    if (user1JsonObject.get("gambar").toString().isEmpty()) {
+                        findViewById(R.id.profileUserBerita).setVisibility(View.GONE);
+                    } else {
+                        CircleImageView userCircleImageView = (CircleImageView) findViewById(R.id.profileUserBerita);
+                        userCircleImageView.setImageResource(R.drawable.ic_person_blue_24dp);
+                        userCircleImageView.setVisibility(View.VISIBLE);
+                        Glide.with(userCircleImageView.getContext())
+                                .load(user1JsonObject.get("gambar").toString())
+                                .listener(new RequestListener<String, GlideDrawable>() {
+                                    @Override
+                                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                                        return false;
+                                    }
+                                })
+                                .into(userCircleImageView);
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -1420,6 +1515,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             beritaDetailProgressBar.setVisibility(View.VISIBLE);
 
             findViewById(R.id.beritadetailkomentarform).setVisibility(View.GONE);
+            findViewById(R.id.layoutberitadetailuser).setVisibility(View.GONE);
+            buttonShareBerita.setVisibility(View.GONE);
             bertiaDetailAddKomentar.setVisibility(View.GONE);
             linerlayoutVerticalDAta.removeAllViews();
         }
@@ -2576,5 +2673,155 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Toast toast = Toast.makeText(MainActivity.this,alert,Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
+    }
+
+    private class AddShareBeritaUser extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String fileNameForUpload = "";
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(PropertiesData.domain.concat("android/addshareberitauser"));
+
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("usernamenik", sharedPreferences.getString("usernamenik", "")));
+            nameValuePairs.add(new BasicNameValuePair("password", sharedPreferences.getString("password", "")));
+
+            try {
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                HttpResponse response = httpclient.execute(httpPost);
+                viewhtmlPost(response);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
+
+    private class GetPesanUser extends AsyncTask<String, Void, String> {
+        JSONObject jsonObject;
+        @Override
+        protected String doInBackground(String... params) {
+            BufferedReader inputStream = null;
+            URL myurl = null;
+            try {
+                myurl = new URL(PropertiesData.domain.concat("android/getpesanafterlogin")
+                        .concat("?usernamenik=").concat(sharedPreferences.getString("usernamenik", ""))
+                        .concat("&password=").concat(sharedPreferences.getString("password", "")));
+                URLConnection dc = myurl.openConnection();
+                inputStream = new BufferedReader(new InputStreamReader(
+                        dc.getInputStream()));
+                jsonObject = new JSONObject(inputStream.readLine());
+                pesanUsers.clear();
+                pesanUsers.add(new PesanUser(Html.fromHtml(jsonObject.get("pesan").toString()).toString()));
+
+                JSONArray jsonArray = new JSONArray(jsonObject.get("pesanpribadi").toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObjectRow = jsonArray.getJSONObject(i);
+                    pesanUsers.add(new PesanUser(jsonObjectRow.get("id").toString(), jsonObjectRow.get("judul").toString(), jsonObjectRow.get("pesan").toString()));
+                }
+
+            } catch (MalformedURLException e) {
+                Log.e("e4r", e.getMessage());
+            } catch (IOException e) {
+                Log.e("e4g7gr", e.getMessage());
+            } catch (JSONException e) {
+                Log.e("e443gr", e.getMessage());
+            } finally {
+                if (inputStream != null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        Log.e("d5e4r", e.getMessage());
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (jsonObject == null) {
+                showAlert("Koneksi Internet Terputus");
+            } else {
+                pesanList.notifyDataSetInvalidated();
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
+
+    private class DeletePesanUser extends AsyncTask<String, Void, String> {
+        private JSONObject jsonObject;
+        private String id;
+        public DeletePesanUser(String id1) {
+            super();
+            id = id1;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(PropertiesData.domain.concat("android/deletepesanuser"));
+
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("usernamenik", sharedPreferences.getString("usernamenik", "")));
+            nameValuePairs.add(new BasicNameValuePair("password", sharedPreferences.getString("password", "")));
+            nameValuePairs.add(new BasicNameValuePair("id", id));
+
+            try {
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                HttpResponse response = httpclient.execute(httpPost);
+                viewhtmlPost(response);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
+    }
+
+    public void deletePesanUser(String id) {
+        new DeletePesanUser(id).execute();
     }
 }

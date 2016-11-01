@@ -60,11 +60,49 @@
             android:layout_marginBottom="20dp" />
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/deskripsiberitadetail"
+            android:id="@+id/layoutberitadetailuser">
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profileUserBerita"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_person_blue_24dp"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#cdcfa9"
+                android:layout_below="@+id/textView7"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/profileNameUserBerita"
+                android:textColor="#1b1bc1"
+                android:textStyle="bold|italic"
+                android:text="Name"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutberitadetailuser"
+            android:layout_centerHorizontal="true"
+            android:text="Share / Sebarkan Berita"
+            android:id="@+id/buttonShareBerita"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:background="@android:color/holo_green_dark"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp" />
+
+        <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/linerlayoutVerticalDAta"
-            android:layout_below="@+id/deskripsiberitadetail"
+            android:layout_below="@+id/buttonShareBerita"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"></LinearLayout>
 
