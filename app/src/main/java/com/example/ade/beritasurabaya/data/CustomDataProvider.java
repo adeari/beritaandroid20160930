@@ -34,6 +34,7 @@ public class CustomDataProvider {
         if (!sharedPreferences.getString("usernamenik", "").isEmpty()) {
             rootMenu.add(new GroupItem("Pengaturan", null, R.drawable.ic_alarm_on_green_24dp));
         }
+        rootMenu.add(new GroupItem("Info Kami", null, R.drawable.ic_contact_mail_blue_24dp));
         return rootMenu;
     }
 
@@ -66,6 +67,9 @@ public class CustomDataProvider {
                         break;
                     case "Pengaturan" :
                         result = getPengaturan();
+                        break;
+                    case "Info Kami" :
+                        result = getInfoKami();
                         break;
                 }
                 break;
@@ -101,6 +105,12 @@ public class CustomDataProvider {
         list.add(new Item("Pesan", "Pesan", R.drawable.ic_mail_outline_blue_24dp));
         list.add(new Item("Saya", "Saya", R.drawable.ic_person_outline_blue_24dp));
         list.add(new Item("Log Out", "Log Out", R.drawable.ic_alarm_off_red_24dp));
+        return list;
+    }
+    private static List<BaseItem> getInfoKami(){
+        List<BaseItem> list = new ArrayList<>();
+        list.add(new Item("Alamat Kami", "Alamat Kami", R.drawable.ic_location_on_orange_24dp));
+        list.add(new Item("Hubungi Kami", "Hubungi Kami", R.drawable.ic_call_brown_24dp));
         return list;
     }
 

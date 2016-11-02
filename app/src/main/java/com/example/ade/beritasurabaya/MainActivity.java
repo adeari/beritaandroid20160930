@@ -60,9 +60,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.example.ade.beritasurabaya.data.Alamat;
 import com.example.ade.beritasurabaya.data.BaseItem;
 import com.example.ade.beritasurabaya.data.CustomDataProvider;
 import com.example.ade.beritasurabaya.data.PesanUser;
+import com.example.ade.beritasurabaya.views.AlamatKantorList;
 import com.example.ade.beritasurabaya.views.LevelBeamView;
 import com.example.ade.beritasurabaya.views.PesanList;
 
@@ -102,6 +104,7 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity implements LocationListener {
     private MainActivity mainActivity;
     private ProgressBar populerProgressBar;
+    private ProgressBar progressBarPesanUser;
     private ListView populerListView;
     private DrawerLayout drawer;
     private ListImageText _listImageText;
@@ -111,7 +114,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private PesanList pesanList;
     private ArrayList<PesanUser> pesanUsers;
 
-
+    private ListView listAlamatKantor;
+    private AlamatKantorList alamatKantorList;
+    private ArrayList<Alamat> alamats;
 
     private ProgressBar beritaAddProgressbar;
     private ProgressBar beritaDetailProgressBar;
@@ -181,6 +186,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         populerProgressBar = (ProgressBar) findViewById(R.id.progressBarPopuler);
         populerProgressBar.getIndeterminateDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.MULTIPLY);
 
+        progressBarPesanUser = (ProgressBar) findViewById(R.id.progressBarPesanUser);
+        progressBarPesanUser.getIndeterminateDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.MULTIPLY);
+        progressBarPesanUser.setVisibility(View.GONE);
+
         beritaAddProgressbar = (ProgressBar) findViewById(R.id.beritaAddProgressbar);
         beritaAddProgressbar.getIndeterminateDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.MULTIPLY);
         beritaAddProgressbar.getLayoutParams().height = 200;
@@ -217,6 +226,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         pesanList = new PesanList(mainActivity, pesanUsers);
         listPesan = (ListView) findViewById(R.id.listpesan);
         listPesan.setAdapter(pesanList);
+
+        alamats = new ArrayList<Alamat>();
+        alamats.add(new Alamat("Surabaya", "Jl. Ketintang no 334", "045446464", "cs@surabayadigitalcity.net"));
+        alamatKantorList = new AlamatKantorList(mainActivity, alamats);
+        listAlamatKantor = (ListView) findViewById(R.id.listalamatkantor);
+        listAlamatKantor.setAdapter(alamatKantorList);
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, new String[]{"Umum", "Acara", "Pengaduan"});
@@ -615,6 +630,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                         closeLayouts();
                         setViewLayout((View) findViewById(R.id.userlogin), View.VISIBLE);
                         loginProgressbar.setVisibility(View.GONE);
+                        break;
+                    case "Alamat Kami" :
+                        closeLayouts();
+                        setViewLayout((View) findViewById(R.id.alamatkantor), View.VISIBLE);
                         break;
 
                 }
@@ -1330,6 +1349,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     break;
                 case R.id.pesanuser: viewLayout = "pesanuser";
                     break;
+                case R.id.alamatkantor: viewLayout = "alamatkantor";
+                    break;
             }
         }
     }
@@ -1342,6 +1363,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         setViewLayout((View) findViewById(R.id.userlogin), View.GONE);
         setViewLayout((View) findViewById(R.id.profileuser), View.GONE);
         setViewLayout((View) findViewById(R.id.pesanuser), View.GONE);
+        setViewLayout((View) findViewById(R.id.alamatkantor), View.GONE);
+        setViewLayout((View) findViewById(R.id.kirimpesanform), View.GONE);
     }
 
     public void closeLayoutsFirst() {
@@ -1351,6 +1374,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         findViewById(R.id.userregister).setVisibility(View.GONE);
         findViewById(R.id.userlogin).setVisibility(View.GONE);
         findViewById(R.id.profileuser).setVisibility(View.GONE);
+        findViewById(R.id.pesanuser).setVisibility(View.GONE);
+        findViewById(R.id.alamatkantor).setVisibility(View.GONE);
+        findViewById(R.id.kirimpesanform).setVisibility(View.GONE);
     }
 
     private class GetBeritaDetail extends AsyncTask<String, Void, String> {
@@ -2762,11 +2788,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             } else {
                 pesanList.notifyDataSetInvalidated();
             }
+            progressBarPesanUser.setVisibility(View.GONE);
+            findViewById(R.id.listpesan).setVisibility(View.VISIBLE);
+
         }
 
         @Override
         protected void onPreExecute() {
-
+            progressBarPesanUser.setVisibility(View.VISIBLE);
+            findViewById(R.id.listpesan).setVisibility(View.GONE);
         }
 
         @Override
