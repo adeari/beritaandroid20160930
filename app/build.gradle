@@ -5,7 +5,7 @@ android {
         keystore {
             keyAlias 'kitaaja'
             keyPassword 'asdf1234'
-            storeFile file('C:/Users/widianta.CAMLINE/Documents/android/ade.jks')
+            storeFile file('C:/Users/widianta.CAMLINE/Documents/cekajah/android/ade.jks')
             storePassword 'asdf12234'
         }
     }
@@ -26,8 +26,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.keystore
         }
-    }
-    productFlavors {
     }
 }
 

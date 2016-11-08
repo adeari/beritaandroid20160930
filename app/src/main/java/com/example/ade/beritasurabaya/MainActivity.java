@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private MainActivity mainActivity;
     private ProgressBar populerProgressBar;
     private ProgressBar progressBarPesanUser;
+    private ProgressBar kirimPesanprogressBar;
     private ListView populerListView;
     private DrawerLayout drawer;
     private ListImageText _listImageText;
@@ -189,6 +190,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         progressBarPesanUser = (ProgressBar) findViewById(R.id.progressBarPesanUser);
         progressBarPesanUser.getIndeterminateDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.MULTIPLY);
         progressBarPesanUser.setVisibility(View.GONE);
+
+        kirimPesanprogressBar = (ProgressBar) findViewById(R.id.kirimPesanprogressBar);
+        kirimPesanprogressBar.getIndeterminateDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.MULTIPLY);
+        kirimPesanprogressBar.setVisibility(View.GONE);
 
         beritaAddProgressbar = (ProgressBar) findViewById(R.id.beritaAddProgressbar);
         beritaAddProgressbar.getIndeterminateDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.MULTIPLY);
@@ -428,13 +433,42 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String profilePassword = ((EditText) findViewById(R.id.profilePassword)).getText().toString();
+                        String profilePassword = ((com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText) findViewById(R.id.profilePassword)).getText().toString();
                         if (profilePassword.length() == 0) {
                             showAlert("Isikan Password");
                         } else if (!profilePassword.equals(((EditText) findViewById(R.id.profileRePassword)).getText().toString())) {
                             showAlert("Re password harus sama dengan password");
                         } else {
                             new GantiPasswordProfileProfile().execute();
+                        }
+                    }
+                }
+        );
+        ((Button) findViewById(R.id.buttonforsendpesan)).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean cansave = true;
+                        String dataText = ((EditText) findViewById(R.id.emailTextKirimPesan)).getText().toString();
+                        if (dataText.isEmpty()) {
+                            showAlert("Isikan Email");
+                            cansave = false;
+                        }
+
+                        dataText = ((EditText) findViewById(R.id.judulTextKirimPesan)).getText().toString();
+                        if (dataText.isEmpty()) {
+                            showAlert("Isikan Judul Pesan");
+                            cansave = false;
+                        }
+
+                        dataText = ((EditText) findViewById(R.id.pesanTextKirimPesan)).getText().toString();
+                        if (dataText.isEmpty()) {
+                            showAlert("Isikan Pesan");
+                            cansave = false;
+                        }
+
+                        if (cansave) {
+                            new KirimPesanFromUser().execute();
                         }
                     }
                 }
@@ -634,6 +668,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     case "Alamat Kami" :
                         closeLayouts();
                         setViewLayout((View) findViewById(R.id.alamatkantor), View.VISIBLE);
+                        break;
+                    case "Hubungi Kami" :
+                        closeLayouts();
+                        ((EditText) findViewById(R.id.emailTextKirimPesan)).setText("");
+                        ((EditText) findViewById(R.id.judulTextKirimPesan)).setText("");
+                        ((EditText) findViewById(R.id.pesanTextKirimPesan)).setText("");
+                        setViewLayout((View) findViewById(R.id.kirimpesanform), View.VISIBLE);
                         break;
 
                 }
@@ -1440,7 +1481,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                     showAlert("Koneksi Internet Terputus");
                 } else {
                     ((TextView) findViewById(R.id.judulBeritaDetail)).setText(jsonObject.get("judul").toString());
-                    ((TextView) findViewById(R.id.deskripsiberitadetail)).setText(jsonObject.get("deskripsi").toString());
+                    ((TextView) findViewById(R.id.deskripsiberitadetail)).setText(Html.fromHtml(jsonObject.get("deskripsi").toString()));
                     ((TextView) findViewById(R.id.dateberitadetail)).setText(jsonObject.get("tanggal").toString());
                     ((TextView) findViewById(R.id.beritadetailidberita)).setText(_id);
 
@@ -1972,7 +2013,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 showAlert("Koneksi Internet Terputus");
             } else {
                 ((EditText) findViewById(R.id.beritaaddJudulBerita)).setText(imageText.getJudul());
-                ((EditText) findViewById(R.id.beritaaddDeskripsi)).setText(imageText.getBerita());
+                ((EditText) findViewById(R.id.beritaaddDeskripsi)).setText(Html.fromHtml(imageText.getBerita()));
                 ((TextView) findViewById(R.id.idberitaedit)).setText(imageText.getId());
                 int position = 0;
                 while (position < beritaAddSpinner.getAdapter().getCount()) {
@@ -2384,7 +2425,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             ((EditText) findViewById(R.id.profileNama)).setText("");
             ((EditText) findViewById(R.id.profileNik)).setText("");
             ((EditText) findViewById(R.id.profileEmail)).setText("");
-            ((EditText) findViewById(R.id.profilePassword)).setText("");
+            ((com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText) findViewById(R.id.profilePassword)).setText("");
             ((EditText) findViewById(R.id.profileRePassword)).setText("");
             profileProgressBar.setVisibility(View.VISIBLE);
         }
@@ -2601,7 +2642,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         @Override
         protected void onPreExecute() {
-            password = ((EditText) findViewById(R.id.profilePassword)).getText().toString();
+            password = ((com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText) findViewById(R.id.profilePassword)).getText().toString();
             findViewById(R.id.profileGantiPasswordProgressBar).setVisibility(View.VISIBLE);
         }
 
@@ -2853,5 +2894,55 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     public void deletePesanUser(String id) {
         new DeletePesanUser(id).execute();
+    }
+
+    private class KirimPesanFromUser extends AsyncTask<String, Void, String> {
+        private String judul;
+        private String pesan;
+        private String email;
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(PropertiesData.domain.concat("android/kirimpesancs"));
+
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("usernamenik", sharedPreferences.getString("usernamenik", "")));
+            nameValuePairs.add(new BasicNameValuePair("password", sharedPreferences.getString("password", "")));
+            nameValuePairs.add(new BasicNameValuePair("email", email));
+            nameValuePairs.add(new BasicNameValuePair("judul", judul));
+            nameValuePairs.add(new BasicNameValuePair("pesan", pesan));
+
+            try {
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                HttpResponse response = httpclient.execute(httpPost);
+                viewhtmlPost(response);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            kirimPesanprogressBar.setVisibility(View.GONE);
+            showAlert("Pesan terkirim");
+        }
+
+        @Override
+        protected void onPreExecute() {
+            email = ((EditText) findViewById(R.id.emailTextKirimPesan)).getText().toString();
+            judul = ((EditText) findViewById(R.id.judulTextKirimPesan)).getText().toString();
+            pesan = ((EditText) findViewById(R.id.pesanTextKirimPesan)).getText().toString();
+            kirimPesanprogressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+        }
     }
 }

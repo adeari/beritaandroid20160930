@@ -19,7 +19,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:text="Email"
@@ -39,10 +39,10 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:text="Email"
+            android:text="Judul"
             android:layout_height="wrap_content"
             android:id="@+id/judulpesanlabel"
             android:layout_weight="1"
@@ -56,24 +56,35 @@
             android:id="@+id/judulTextKirimPesan"
             android:layout_weight="1" />
     </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <TextView
-            android:text="Email"
+            android:text="Pesan"
             android:layout_height="wrap_content"
             android:id="@+id/pesanpesanlabel"
-            android:layout_weight="1"
-            android:layout_width="50dp" />
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent" />
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:inputType="text"
             android:ems="10"
             android:id="@+id/pesanTextKirimPesan"
-            android:layout_weight="1" />
-    </LinearLayout>
+            android:gravity="top"
+            android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/kirimPesanprogressBar"
+        android:indeterminate="false"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Kirim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonforsendpesan"
+        android:background="@color/level_5" />
+
 </LinearLayout>

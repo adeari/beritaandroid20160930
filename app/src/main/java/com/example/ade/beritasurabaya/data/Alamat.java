@@ -19,11 +19,9 @@ public class Alamat {
     public String getAlamat() {
         return alamat;
     }
-
     public String getEmail() {
         return email;
     }
-
     public String getKota() {
         return kota;
     }

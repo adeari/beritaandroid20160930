@@ -162,7 +162,7 @@
                 android:layout_below="@+id/textView8"
                 android:textColor="#090808" />
 
-            <EditText
+            <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -178,7 +178,7 @@
                 android:layout_below="@+id/profilePassword"
                 android:textColor="#090808" />
 
-            <EditText
+            <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
