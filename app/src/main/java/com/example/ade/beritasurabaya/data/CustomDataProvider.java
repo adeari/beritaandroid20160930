@@ -30,7 +30,7 @@ public class CustomDataProvider {
             rootMenu.add(new Item("Log In", "Log In", R.drawable.ic_alarm_on_green_24dp));
         }
         rootMenu.add(new GroupItem("Berita", null, R.drawable.ic_alarm_on_green_24dp));
-        rootMenu.add(new GroupItem("Artikel", null, R.drawable.ic_alarm_on_green_24dp));
+        rootMenu.add(new GroupItem("Beranda", null, R.drawable.ic_alarm_on_green_24dp));
         if (!sharedPreferences.getString("usernamenik", "").isEmpty()) {
             rootMenu.add(new GroupItem("Pengaturan", null, R.drawable.ic_alarm_on_green_24dp));
         }
@@ -62,7 +62,7 @@ public class CustomDataProvider {
                     case "Berita" :
                         result = getBerita();
                         break;
-                    case "Artikel" :
+                    case "Beranda" :
                         result = getArtikel();
                         break;
                     case "Pengaturan" :
@@ -93,7 +93,7 @@ public class CustomDataProvider {
     private static List<BaseItem> getArtikel(){
         List<BaseItem> list = new ArrayList<>();
         list.add(new Item("Umum", "Umum", R.drawable.ic_clear_all_black_24dp));
-        list.add(new Item("Acara", "Acara", R.drawable.ic_clear_all_black_24dp));
+        list.add(new Item("Promo Anda", "Acara", R.drawable.ic_clear_all_black_24dp));
         list.add(new Item("Pengaduan", "Pengaduan", R.drawable.ic_clear_all_black_24dp));
         return list;
     }

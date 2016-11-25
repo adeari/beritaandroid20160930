@@ -19,7 +19,7 @@
     </group>
     <group  android:id="@+id/artikelgroup" android:checkableBehavior="none">
         <item android:title="Umum" android:id="@+id/umummenu" android:icon="@drawable/ic_clear_all_black_24dp"></item>
-        <item android:title="Acara" android:id="@+id/acaramenu" android:icon="@drawable/ic_clear_all_black_24dp"></item>
+        <item android:title="Promo Anda" android:id="@+id/acaramenu" android:icon="@drawable/ic_clear_all_black_24dp"></item>
         <item android:title="Pengaduan" android:id="@+id/pengaduanmenu" android:icon="@drawable/ic_clear_all_black_24dp"></item>
     </group>
 

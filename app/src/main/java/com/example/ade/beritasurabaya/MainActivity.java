@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         listAlamatKantor.setAdapter(alamatKantorList);
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, new String[]{"Umum", "Acara", "Pengaduan"});
+                android.R.layout.simple_spinner_item, new String[]{"Umum", "Promo Anda", "Pengaduan"});
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         beritaAddSpinner = (Spinner) findViewById(R.id.beritaaddSpinner);
         beritaAddSpinner.setAdapter(dataAdapter);
@@ -628,6 +628,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         private void showItemDescription(Object object, ItemInfo itemInfo) {
             BaseItem baseItem = (BaseItem) object;
             if (baseItem.getFunctionName() != null) {
+                viewAlert(baseItem.getFunctionName());
                 setTitle(baseItem.getName());
                 switch (baseItem.getFunctionName()) {
                     case "Populer" : showPopulerBeritaList("populer"); break;
@@ -802,6 +803,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
             nameValuePairs.add(new BasicNameValuePair("judul", judulBerita));
             nameValuePairs.add(new BasicNameValuePair("deskripsi", deskripsi));
+            if (kategori.equalsIgnoreCase("Promo Anda"))  kategori = "Acara";
             nameValuePairs.add(new BasicNameValuePair("kategori", kategori));
             nameValuePairs.add(new BasicNameValuePair("idberita", idBerita));
             nameValuePairs.add(new BasicNameValuePair("imageaction", imageAction));
@@ -953,8 +955,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), selectedImage);
             BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
             Bitmap bmp = drawable.getBitmap();
-            Bitmap b = Bitmap.createScaledBitmap(bmp, selectedImage.getHeight() * 500 / selectedImage.getHeight(), 500, false);
+            Bitmap b = Bitmap.createScaledBitmap(bmp, selectedImage.getHeight() * 1000 / selectedImage.getHeight(), 1000, false);
             imageView.setImageBitmap(b);
+            imageView.getLayoutParams().height = RelativeLayout.LayoutParams.WRAP_CONTENT;
         } catch (FileNotFoundException e) {
             Log.e("FileEx", e.getMessage());
         }
@@ -1031,6 +1034,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                         .concat(sharedPreferences.getString("usernamenik", ""))
                         .concat("&password=").concat(sharedPreferences.getString("password", ""));
             } else {
+
+                if (beritaShow.equalsIgnoreCase("Promo Anda")) beritaShow = "Artikel";
                 urlExecute = PropertiesData.domain.concat("android/artikel-").concat(beritaShow);
                 if (sharedPreferences.getString("usernamenik", "").isEmpty()) {
                     urlExecute = urlExecute.concat("?");
@@ -1346,6 +1351,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void showPopulerBeritaList(String pilihan) {
+        viewAlert(" pilih ".concat(pilihan));
         beritaShow = pilihan;
         closeLayouts();
         setViewLayout((View) findViewById(R.id.populer), View.VISIBLE);
@@ -2016,8 +2022,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 ((EditText) findViewById(R.id.beritaaddDeskripsi)).setText(Html.fromHtml(imageText.getBerita()));
                 ((TextView) findViewById(R.id.idberitaedit)).setText(imageText.getId());
                 int position = 0;
+                String kategoriSearch = imageText.getKategori();
+                if (kategoriSearch.equalsIgnoreCase("Acara")) {
+                    kategoriSearch = "Promo Anda";
+                }
                 while (position < beritaAddSpinner.getAdapter().getCount()) {
-                    if (beritaAddSpinner.getAdapter().getItem(position).toString().equalsIgnoreCase(imageText.getKategori())) {
+                    if (beritaAddSpinner.getAdapter().getItem(position).toString().equalsIgnoreCase(kategoriSearch)) {
                         beritaAddSpinner.setSelection(position);
                         break;
                     }
@@ -2944,5 +2954,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         @Override
         protected void onProgressUpdate(Void... values) {
         }
+    }
+
+    private void viewAlert(String alert) {
+        Log.i("alert", "cekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk ____ ".concat(alert));
     }
 }
